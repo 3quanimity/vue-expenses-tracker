@@ -1,12 +1,12 @@
 <script setup>
-import { ref } from "vue";
+import { defineProps } from "vue";
 
-const transactions = ref([
-  { id: 1, text: "Flower", amount: -19.99 },
-  { id: 2, text: "Salary", amount: 299.97 },
-  { id: 3, text: "Book", amount: -39.97 },
-  { id: 4, text: "Business", amount: 599.97 },
-]);
+const props = defineProps({
+  transactions: {
+    type: Array,
+    required: true,
+  },
+});
 
 const formatAmount = (value) => {
   return value >= 0 ? "$" + value : "-$" + Math.abs(value);
@@ -17,7 +17,7 @@ const formatAmount = (value) => {
   <h3>History</h3>
   <ul id="list" class="list">
     <li
-      v-for="{ id, text, amount } in transactions"
+      v-for="{ id, text, amount } in props.transactions"
       :class="amount < 0 ? 'minus' : 'plus'"
       :key="id"
     >
