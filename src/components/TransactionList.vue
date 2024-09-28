@@ -1,5 +1,6 @@
 <script setup>
 import { defineProps } from "vue";
+import { utils } from "@/utils/utils.js";
 
 const props = defineProps({
   transactions: {
@@ -7,10 +8,6 @@ const props = defineProps({
     required: true,
   },
 });
-
-const formatAmount = (value) => {
-  return value >= 0 ? "$" + value : "-$" + Math.abs(value);
-};
 </script>
 
 <template>
@@ -22,7 +19,7 @@ const formatAmount = (value) => {
       :key="id"
     >
       {{ text }}
-      <span>{{ formatAmount(amount) }}</span>
+      <span>{{ utils.formatAmount(amount) }}</span>
       <button class="delete-btn">x</button>
     </li>
   </ul>
