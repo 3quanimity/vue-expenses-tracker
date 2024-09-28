@@ -14,7 +14,7 @@ export default {
     IncomeExpenses,
     TransactionList,
     AddTransaction,
-  }
+  },
 }
 </script>
 
