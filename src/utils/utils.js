@@ -1,5 +1,9 @@
-const formatAmount = (value) => {
-  return value >= 0 ? "$" + value : "-$" + Math.abs(value);
+const formatAmountWithCurrency = (amount, currencySymbol = "$", digits = 2) => {
+  const trimmedAbsoluteValue = Math.abs(amount).toFixed(digits);
+  const currencySymbolWithSign =
+    amount >= 0 ? currencySymbol : "-" + currencySymbol;
+
+  return currencySymbolWithSign + trimmedAbsoluteValue;
 };
 
-export const utils = { formatAmount };
+export const utils = { formatAmountWithCurrency };

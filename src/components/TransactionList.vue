@@ -19,7 +19,7 @@ const props = defineProps({
       :key="id"
     >
       {{ text }}
-      <span>{{ utils.formatAmount(amount) }}</span>
+      <span>{{ utils.formatAmountWithCurrency(amount) }}</span>
       <button class="delete-btn">x</button>
     </li>
   </ul>
