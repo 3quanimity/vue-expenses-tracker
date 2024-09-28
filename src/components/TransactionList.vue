@@ -1,25 +1,15 @@
-<script>
-export default {
-  data() {
-    return {
-      transactions: [
-        { id: 1, text: "Flower", amount: -19.99 },
-        { id: 2, text: "Salary", amount: 299.97 },
-        { id: 3, text: "Book", amount: -39.97 },
-        { id: 4, text: "Business", amount: 599.97 },
-      ],
-    };
-  },
+<script setup>
+import { ref } from "vue";
 
-  methods: {
-    formatAmount(value) {
-      if (value >= 0) {
-        return "$" + value;
-      } else {
-        return "-$" + Math.abs(value);
-      }
-    },
-  },
+const transactions = ref([
+  { id: 1, text: "Flower", amount: -19.99 },
+  { id: 2, text: "Salary", amount: 299.97 },
+  { id: 3, text: "Book", amount: -39.97 },
+  { id: 4, text: "Business", amount: 599.97 },
+]);
+
+const formatAmount = (value) => {
+  return value >= 0 ? "$" + value : "-$" + Math.abs(value);
 };
 </script>
 
