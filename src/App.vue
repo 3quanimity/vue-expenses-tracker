@@ -83,11 +83,11 @@ const saveTransactionsToLocalStorage = () => {
   <div class="container">
     <TotalBalance :total="total" />
     <IncomeExpenses :income="income" :expenses="expenses" />
+    <AddTransaction @transactionSubmitted="handleTransactionSubmitted" />
     <TransactionList
       v-if="transactions?.length"
       :transactions="transactions"
       @onDeleteTransaction="handleDeleteTransaction"
     />
-    <AddTransaction @transactionSubmitted="handleTransactionSubmitted" />
   </div>
 </template>

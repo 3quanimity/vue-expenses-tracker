@@ -43,25 +43,31 @@ const clearFields = () => {
   <h3>Add new transaction</h3>
   <form id="form" @submit.prevent="onSubmit">
     <div class="form-control">
-      <label for="text">Transaction Title</label>
       <input
         type="text"
         id="text"
         v-model="transaction.title"
-        placeholder="Enter text..."
+        placeholder="Transaction title..."
       />
     </div>
     <div class="form-control">
-      <label for="amount">Amount</label>
       <input
         type="text"
         id="amount"
         v-model="transaction.amount"
-        placeholder="Enter amount..."
+        placeholder="Amount..."
       />
     </div>
     <button class="btn">Add Transaction</button>
   </form>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.form-control {
+  padding-bottom: 10px;
+
+  &:last-of-type {
+    padding-bottom: 0;
+  }
+}
+</style>
