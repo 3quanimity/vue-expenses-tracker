@@ -11,7 +11,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <h4>Income</h4>
+  <h4>Balance</h4>
   <h1 id="balance">{{ utils.formatAmountWithCurrency(props.total) }}</h1>
 </template>
 
