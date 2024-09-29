@@ -25,7 +25,7 @@
     --nord-aurora-orange: #d08770;
     --nord-aurora-yellow: #ebcb8b;
     --nord-aurora-green: #a3be8c;
-    --nord-aurora-purple: #b48ead;
+    --nord-aurora-purple: #97678e; /* original value #b48ead; */
 }
 
 * {
@@ -53,6 +53,11 @@ body {
 h1 {
     letter-spacing: 1px;
     margin: 0;
+}
+
+h2 {
+    border-bottom: 1px solid var(--nord-snow-storm-lighter);
+    padding-bottom: 10px;
 }
 
 h3 {

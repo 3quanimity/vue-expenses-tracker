@@ -51,7 +51,20 @@ const handleTransactionSubmitted = (transactionData) => {
     ...transactionData,
     id: utils.generateUniqueId(),
   });
-  toast.success("Transaction Added Successfully");
+  toast.success(`${transactionData.title} Transaction Added`);
+};
+
+// Delete Transaction
+const handleDeleteTransaction = (transactionId) => {
+  const deletedTransaction = transactions.value.find(
+    (transaction) => transaction.id === transactionId,
+  );
+  transactions.value = transactions.value.filter(
+    (transaction) => transaction.id !== transactionId,
+  );
+  toast.success(`${deletedTransaction.title} Transaction Deleted`);
+
+  console.log(transactionId);
 };
 </script>
 
@@ -60,7 +73,11 @@ const handleTransactionSubmitted = (transactionData) => {
   <div class="container">
     <TotalBalance :total="total" />
     <IncomeExpenses :income="income" :expenses="expenses" />
-    <TransactionList v-if="transactions?.length" :transactions="transactions" />
+    <TransactionList
+      v-if="transactions?.length"
+      :transactions="transactions"
+      @onDeleteTransaction="handleDeleteTransaction"
+    />
     <AddTransaction @transactionSubmitted="handleTransactionSubmitted" />
   </div>
 </template>
