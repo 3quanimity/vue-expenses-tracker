@@ -3,6 +3,7 @@
 :root {
     --box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
 
+    /* Polar Night */
     --nord-polar-night-darkest: #2e3440;
     --nord-polar-night-darker: #3b4252;
     --nord-polar-night-dark: #434c5e;
@@ -32,8 +33,8 @@
 }
 
 body {
-    background-color: #2e3440;
-    color: #d8dee9;
+    background-color: var(--nord-polar-night-darkest);
+    color: var(--nord-snow-storm-light);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -55,7 +56,7 @@ h1 {
 }
 
 h3 {
-    border-bottom: 1px solid #bbb;
+    border-bottom: 1px solid var(--nord-snow-storm-lighter);
     padding-bottom: 10px;
     margin: 40px 0 10px;
 }
@@ -66,7 +67,7 @@ h4 {
 }
 
 .inc-exp-container {
-    background-color: #4c566a;
+    background-color: var(--nord-polar-night-light);
     box-shadow: var(--box-shadow);
     padding: 20px;
     display: flex;
@@ -80,7 +81,7 @@ h4 {
 }
 
 .inc-exp-container > div:first-of-type {
-    border-right: 1px solid #e5e9f0;
+    border-right: 1px solid var(--nord-snow-storm-lighter);
 }
 
 .money {
@@ -90,11 +91,11 @@ h4 {
 }
 
 .money.plus {
-    color: #a3be8c;
+    color: var(--nord-aurora-green);
 }
 
 .money.minus {
-    color: #bf616a;
+    color: var(--nord-aurora-red);
 }
 
 label {
@@ -104,7 +105,7 @@ label {
 
 input[type='text'],
 input[type='number'] {
-    border: 1px solid #e5e9f0;
+    border: 1px solid var(--nord-snow-storm-lighter);
     border-radius: 2px;
     display: block;
     font-size: 16px;
@@ -114,9 +115,9 @@ input[type='number'] {
 
 .btn {
     cursor: pointer;
-    background-color: #b48ead;
+    background-color: var(--nord-aurora-purple);
     box-shadow: var(--box-shadow);
-    color: #d8dee9;
+    color: var(--nord-snow-storm-light);
     border: 0;
     display: block;
     font-size: 16px;
@@ -137,7 +138,7 @@ input[type='number'] {
 }
 
 .list li {
-    background-color: #4c566a;
+    background-color: var(--nord-polar-night-light);
     box-shadow: var(--box-shadow);
     display: flex;
     justify-content: space-between;
@@ -147,18 +148,18 @@ input[type='number'] {
 }
 
 .list li.plus {
-    border-right: 5px solid #a3be8c;
+    border-right: 5px solid var(--nord-aurora-green);
 }
 
 .list li.minus {
-    border-right: 5px solid #bf616a;
+    border-right: 5px solid var(--nord-aurora-red);
 }
 
 .delete-btn {
     cursor: pointer;
-    background-color: #e74c3c;
+    background-color: var(--nord-aurora-red);
     border: 0;
-    color: #d8dee9;
+    color: var(--nord-snow-storm-light);
     font-size: 20px;
     line-height: 20px;
     padding: 2px 5px;
