@@ -1,13 +1,14 @@
 <script setup>
 import { ref } from "vue";
 import { useToast } from "vue-toastification";
+import { TransactionTypes } from "@/enums/transaction.js";
 
 const toast = useToast();
 
 const transaction = ref({
   title: "",
   amount: "",
-  type: "expense",
+  type: TransactionTypes.EXPENSE,
 });
 
 const emit = defineEmits(["transactionSubmitted"]);
@@ -33,7 +34,7 @@ const onSubmit = () => {
   emit("transactionSubmitted", {
     ...transaction.value,
     amount: parseFloat(
-      transaction.value.type === "income"
+      transaction.value.type === TransactionTypes.INCOME
         ? transaction.value.amount
         : -1 * transaction.value.amount,
     ),
@@ -57,8 +58,12 @@ const setTransactionType = (type) => {
 
   <div class="transaction-type-toggle">
     <button
-      :class="['btn', 'btn--income', { active: transaction.type === 'income' }]"
-      @click="setTransactionType('income')"
+      :class="[
+        'btn',
+        'btn--income',
+        { active: transaction.type === TransactionTypes.INCOME },
+      ]"
+      @click="setTransactionType(TransactionTypes.INCOME)"
     >
       income
     </button>
@@ -66,9 +71,9 @@ const setTransactionType = (type) => {
       :class="[
         'btn',
         'btn--expense',
-        { active: transaction.type === 'expense' },
+        { active: transaction.type === TransactionTypes.EXPENSE },
       ]"
-      @click="setTransactionType('expense')"
+      @click="setTransactionType(TransactionTypes.EXPENSE)"
     >
       expense
     </button>
