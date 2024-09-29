@@ -14,11 +14,11 @@ const props = defineProps({
   <h3>History</h3>
   <ul id="list" class="list">
     <li
-      v-for="{ id, text, amount } in props.transactions"
+      v-for="{ id, title, amount } in props.transactions"
       :class="amount < 0 ? 'minus' : 'plus'"
       :key="id"
     >
-      {{ text }}
+      {{ title }}
       <span>{{ utils.formatAmountWithCurrency(amount) }}</span>
       <button class="delete-btn">x</button>
     </li>

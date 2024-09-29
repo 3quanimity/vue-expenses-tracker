@@ -1,3 +1,4 @@
+// Format Amount of money with currency Symbol and digits to display
 const formatAmountWithCurrency = (amount, currencySymbol = "$", digits = 2) => {
   const trimmedAbsoluteValue = Math.abs(amount).toFixed(digits);
   const currencySymbolWithSign =
@@ -6,4 +7,9 @@ const formatAmountWithCurrency = (amount, currencySymbol = "$", digits = 2) => {
   return currencySymbolWithSign + trimmedAbsoluteValue;
 };
 
-export const utils = { formatAmountWithCurrency };
+// Generate Unique ID
+const generateUniqueId = () => {
+  return Math.floor(Math.random() * 100000);
+};
+
+export const utils = { formatAmountWithCurrency, generateUniqueId };
