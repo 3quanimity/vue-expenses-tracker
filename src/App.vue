@@ -1,4 +1,5 @@
 <script setup>
+import axios from "axios";
 import AppHeader from "@/components/AppHeader.vue";
 import TotalBalance from "@/components/TotalBalance.vue";
 import IncomeExpenses from "@/components/IncomeExpenses.vue";
@@ -14,13 +15,20 @@ let transactions = ref([]);
 
 // Life cycles
 onMounted(() => {
-  const localStorageTransactions = JSON.parse(
-    localStorage.getItem("transactions"),
-  );
+  const DB_URL =
+    "https://script.google.com/macros/s/AKfycby13_55x1Z7pF3akJtiwpt0AzJ-5lLMQQw_r4AMiI7pUpLyCcQwgsWdB59WpZiCLP9wGQ/exec";
 
-  if (localStorageTransactions?.length) {
-    transactions.value = localStorageTransactions;
-  }
+  axios.get(DB_URL).then((res) => {
+    transactions.value = res.data;
+  });
+
+  // const localStorageTransactions = JSON.parse(
+  //   localStorage.getItem("transactions"),
+  // );
+  //
+  // if (localStorageTransactions?.length) {
+  //   transactions.value = localStorageTransactions;
+  // }
 });
 
 // Get Total Balance
