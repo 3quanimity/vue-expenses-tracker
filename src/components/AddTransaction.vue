@@ -55,7 +55,7 @@ const setTransactionType = (type) => {
 </script>
 
 <template>
-  <h3>Add new transaction</h3>
+  <h3>Add a new transaction</h3>
 
   <div class="transaction-type-toggle">
     <button
