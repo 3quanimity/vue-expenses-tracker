@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { useToast } from "vue-toastification";
 import { TransactionTypes } from "@/enums/transaction.js";
+import { utils } from "@/utils/utils.js";
 
 const toast = useToast();
 
@@ -65,7 +66,7 @@ const setTransactionType = (type) => {
       ]"
       @click="setTransactionType(TransactionTypes.INCOME)"
     >
-      income
+      {{ utils.capitalizeFirstLetter(TransactionTypes.INCOME) }}
     </button>
     <button
       :class="[
@@ -75,7 +76,7 @@ const setTransactionType = (type) => {
       ]"
       @click="setTransactionType(TransactionTypes.EXPENSE)"
     >
-      expense
+      {{ utils.capitalizeFirstLetter(TransactionTypes.EXPENSE) }}
     </button>
   </div>
 
@@ -85,7 +86,7 @@ const setTransactionType = (type) => {
         type="text"
         id="text"
         v-model="transaction.title"
-        placeholder="Transaction title..."
+        placeholder="Title..."
       />
     </div>
     <div class="form-control">
@@ -96,7 +97,15 @@ const setTransactionType = (type) => {
         placeholder="Amount..."
       />
     </div>
-    <button class="btn">Add Transaction</button>
+    <button
+      :class="[
+        'btn',
+        { 'btn--add-expense': transaction.type === TransactionTypes.EXPENSE },
+        { 'btn--add-income': transaction.type === TransactionTypes.INCOME },
+      ]"
+    >
+      Add {{ utils.capitalizeFirstLetter(transaction.type) }} Transaction
+    </button>
   </form>
 </template>
 
@@ -121,6 +130,20 @@ const setTransactionType = (type) => {
   &--expense {
     &:hover,
     &.active {
+      background-color: var(--nord-aurora-red);
+      color: var(--nord-polar-night-darkest);
+    }
+  }
+
+  &--add-income {
+    &:hover {
+      background-color: var(--nord-frost-green);
+      color: var(--nord-polar-night-darkest);
+    }
+  }
+
+  &--add-expense {
+    &:hover {
       background-color: var(--nord-aurora-red);
       color: var(--nord-polar-night-darkest);
     }
