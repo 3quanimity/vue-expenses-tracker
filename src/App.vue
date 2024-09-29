@@ -12,23 +12,18 @@ import { utils } from "@/utils/utils.js";
 // vars
 const toast = useToast();
 let transactions = ref([]);
+const DB_URL =
+  "https://script.google.com/macros/s/AKfycbyF31SwakIjFCmFzhK5q-8p4tBk1IPN5F1irXDfyeh5O7CSMKBmE9CMgXkcrm1rrdJK7w/exec";
 
 // Life cycles
 onMounted(() => {
-  const DB_URL =
-    "https://script.google.com/macros/s/AKfycby13_55x1Z7pF3akJtiwpt0AzJ-5lLMQQw_r4AMiI7pUpLyCcQwgsWdB59WpZiCLP9wGQ/exec";
+  getTransactionsListFromLocalStorage();
 
-  axios.get(DB_URL).then((res) => {
-    transactions.value = res.data;
-  });
+  if (!transactions.value.length) {
+    getTransactionsListFromGoogleSheet(DB_URL);
+  }
 
-  // const localStorageTransactions = JSON.parse(
-  //   localStorage.getItem("transactions"),
-  // );
-  //
-  // if (localStorageTransactions?.length) {
-  //   transactions.value = localStorageTransactions;
-  // }
+  saveTransactionsToLocalStorage();
 });
 
 // Get Total Balance
@@ -56,7 +51,26 @@ const expenses = computed(() => {
     }, 0);
 });
 
-// Add transaction
+// Get transactionsList from Google Sheet
+const getTransactionsListFromGoogleSheet = (url) => {
+  axios.get(url).then((res) => {
+    console.log(res.data);
+    transactions.value = res.data;
+  });
+};
+
+// Get transactionList from local storage
+const getTransactionsListFromLocalStorage = () => {
+  const localStorageTransactions = JSON.parse(
+    localStorage.getItem("transactions"),
+  );
+
+  if (localStorageTransactions?.length) {
+    transactions.value = localStorageTransactions;
+  }
+};
+
+// Add transaction //TODO: persist data to google sheet
 const handleTransactionSubmitted = (transactionData) => {
   transactions.value.unshift({
     ...transactionData,
@@ -67,7 +81,7 @@ const handleTransactionSubmitted = (transactionData) => {
   toast.success(`${transactionData.title} Transaction Added`);
 };
 
-// Delete Transaction
+// Delete Transaction //TODO: persist data to google sheet
 const handleDeleteTransaction = (transactionId) => {
   const deletedTransaction = transactions.value.find(
     (transaction) => transaction.id === transactionId,
@@ -80,7 +94,7 @@ const handleDeleteTransaction = (transactionId) => {
   toast.success(`${deletedTransaction.title} Transaction Deleted`);
 };
 
-// Save to localStorage
+// Save to localStorage //TODO: persist data to google sheet
 const saveTransactionsToLocalStorage = () => {
   localStorage.setItem("transactions", JSON.stringify(transactions.value));
 };
