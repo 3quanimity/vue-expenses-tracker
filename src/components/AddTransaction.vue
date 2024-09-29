@@ -7,6 +7,7 @@ const toast = useToast();
 const transaction = ref({
   title: "",
   amount: "",
+  type: "expense",
 });
 
 const emit = defineEmits(["transactionSubmitted"]);
@@ -20,14 +21,22 @@ const onSubmit = () => {
     toast.error("Amount is required");
     return;
   }
-  if (transaction.value.amount && !parseFloat(transaction.value.amount)) {
+  if (!parseFloat(transaction.value.amount)) {
     toast.error("Amount must be a number");
+    return;
+  }
+  if (parseFloat(transaction.value.amount) < 0) {
+    toast.error("Amount must be a positive number");
     return;
   }
 
   emit("transactionSubmitted", {
     ...transaction.value,
-    amount: parseFloat(transaction.value.amount),
+    amount: parseFloat(
+      transaction.value.type === "income"
+        ? transaction.value.amount
+        : -1 * transaction.value.amount,
+    ),
   });
 
   clearFields();
@@ -37,10 +46,34 @@ const clearFields = () => {
   transaction.value.title = "";
   transaction.value.amount = "";
 };
+
+const setTransactionType = (type) => {
+  transaction.value.type = type;
+};
 </script>
 
 <template>
   <h3>Add new transaction</h3>
+
+  <div class="transaction-type-toggle">
+    <button
+      :class="['btn', 'btn--income', { active: transaction.type === 'income' }]"
+      @click="setTransactionType('income')"
+    >
+      income
+    </button>
+    <button
+      :class="[
+        'btn',
+        'btn--expense',
+        { active: transaction.type === 'expense' },
+      ]"
+      @click="setTransactionType('expense')"
+    >
+      expense
+    </button>
+  </div>
+
   <form id="form" @submit.prevent="onSubmit">
     <div class="form-control">
       <input
@@ -63,6 +96,32 @@ const clearFields = () => {
 </template>
 
 <style lang="scss" scoped>
+.transaction-type-toggle {
+  display: flex;
+}
+
+.btn {
+  background-color: var(--nord-polar-night-dark);
+  color: var(--nord-snow-storm-light);
+  margin: 10px 0;
+
+  &--income {
+    &:hover,
+    &.active {
+      background-color: var(--nord-frost-green);
+      color: var(--nord-polar-night-darkest);
+    }
+  }
+
+  &--expense {
+    &:hover,
+    &.active {
+      background-color: var(--nord-aurora-red);
+      color: var(--nord-polar-night-darkest);
+    }
+  }
+}
+
 .form-control {
   padding-bottom: 10px;
 
