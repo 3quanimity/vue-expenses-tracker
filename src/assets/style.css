@@ -34,7 +34,7 @@
 
 body {
     background-color: var(--nord-polar-night-darkest);
-    color: var(--nord-snow-storm-light);
+    color: var(--nord-snow-storm-lighter);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -67,7 +67,7 @@ h4 {
 }
 
 .inc-exp-container {
-    background-color: var(--nord-polar-night-light);
+    background-color: var(--nord-polar-night-dark);
     box-shadow: var(--box-shadow);
     padding: 20px;
     display: flex;
@@ -138,7 +138,7 @@ input[type='number'] {
 }
 
 .list li {
-    background-color: var(--nord-polar-night-light);
+    background-color: var(--nord-polar-night-dark);
     box-shadow: var(--box-shadow);
     display: flex;
     justify-content: space-between;
