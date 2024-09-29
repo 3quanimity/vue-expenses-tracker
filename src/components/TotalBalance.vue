@@ -5,14 +5,36 @@ import { utils } from "@/utils/utils.js";
 const props = defineProps({
   total: {
     type: Number,
-    required: true,
+    default: 0,
   },
 });
 </script>
 
-<template>
-  <h4>Balance</h4>
-  <h1 id="balance">{{ utils.formatAmountWithCurrency(props.total) }}</h1>
+<template class="total-balance">
+  <h4 class="total-balance__title">Balance</h4>
+  <h1
+    id="balance"
+    :class="[
+      'total-balance__amount',
+      total < 0
+        ? 'total-balance__amount--minus'
+        : 'total-balance__amount--plus',
+    ]"
+  >
+    {{ utils.formatAmountWithCurrency(props.total) }}
+  </h1>
 </template>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.total-balance {
+  &__amount {
+    &--plus {
+      color: var(--nord-aurora-green);
+    }
+
+    &--minus {
+      color: var(--nord-aurora-red);
+    }
+  }
+}
+</style>
